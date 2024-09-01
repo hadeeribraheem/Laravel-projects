@@ -28,6 +28,7 @@ class AuthController extends Controller
         return back()->with('success','Your registration was successful!');
     }
 
+    //get users data
     public function get_users(){
         $data = User::query()->orderBy('id','desc')->get();
         return UserResource::collection($data);
