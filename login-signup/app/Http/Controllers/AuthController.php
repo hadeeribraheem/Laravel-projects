@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterFormRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,5 +26,10 @@ class AuthController extends Controller
         User::create($data);
 
         return back()->with('success','Your registration was successful!');
+    }
+
+    public function get_users(){
+        $data = User::query()->orderBy('id','desc')->get();
+        return UserResource::collection($data);
     }
 }
