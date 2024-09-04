@@ -1,4 +1,351 @@
+/***********************#f6f9ff********************************/
+/*--start of root variables--*/
+:root{
+    --mainBGColor: #f1f4fb ;
+}
+/*--end of root variables--*/
+/*******************************************************/
+
+/*******************************************************/
+/*--start of global classes--*/
+body{
+    background-color: var(--mainBGColor) !important;
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+}
+a{
+    text-decoration: none !important;
+    cursor: pointer;
+}
+li{
+    list-style: none;
+}
+/*--end of global classes--*/
+/*******************************************************/
+/*******************************************************/
+/*--start of nav bar--*/
+.header {
+    transition: all 0.5s;
+    z-index: 997;
+    height: 60px;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff;
+    padding-left: 20px;
+    width: 100%;
+}
+.logo img {
+    max-height: 26px;
+    margin-right: 6px;
+}
+.logo{
+    text-decoration: none;
+    width: 280px;
+}
+.logo span {
+    font-size: 26px;
+    font-weight: 700;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+}
+.nav-icon{
+    font-size: 22px;
+    color: #012970;
+    margin-right: 25px;
+    position: relative
+}
+.header-nav .nav-profile img {
+    max-height: 36px;
+}
+.header-nav>ul {
+    margin: 0;
+    padding: 0;
+}
+.header-nav .badge-number {
+    position: absolute;
+    inset:-3px -13px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 7px;
+}
+.header .toggle-sidebar-btn {
+    font-size: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #012970;
+}
+.header .search-form input {
+    border: 0;
+    font-size: 14px;
+    color: #012970;
+    border: 1px solid rgba(1, 41, 112, 0.2);
+    padding: 7px 38px 7px 8px;
+    border-radius: 3px;
+    transition: 0.3s;
+    width: 100%;
+}
+.header .search-form button {
+    border: 0;
+    padding: 0;
+    margin-left: -30px;
+    background: none;
+}
+.header .search-bar {
+    min-width: 360px;
+    padding: 0 20px;
+}
+/*--end of nav bar--*/
+/*******************************************************/
+
+/*******************************************************/
+/*-- start of side bar --*/
+.sideBar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.sideBar-nav .nav-content {
+    padding: 5px 0 0 0;
+    margin: 0;
+    list-style: none;
+}
+.sideBar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    /* z-index: 996; */
+    transition: all 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aab7cf transparent;
+    box-shadow:0px 0px 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff;
+}
+.sideBar.collapsed {
+    width: 80px;
+}
+.sideBar .nav-content {
+    padding-left: 20px;
+}
+.content {
+    margin-left: 250px;
+    transition: margin-left 0.3s;
+}
+.content.collapsed {
+    margin-left: 80px;
+}
+.sideBar-nav .nav-heading {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #899bbd;
+    font-weight: 600;
+    margin: 10px 0 5px 15px;
+}
+.nav-link {
+    color: black !important;;
+}
+.sideBar-nav .nav-link{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4154f1;
+    transition: 0.3;
+    background: #f6f9ff;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+.sideBar-nav .nav-link:hover{
+    color: #4154f1 !important;
+    background: #f6f9ff !important;
+}
+.sideBar-nav .nav-link i {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #4154f1;
+}
+.sideBar-nav .nav-link.collapsed i {
+    color: #899bbd;
+}
+.sideBar-nav .nav-link.collapsed {
+    color: #012970;
+    background: #fff;
+}
+.sideBar-nav .nav-content {
+    padding: 5px 0 0 0;
+    margin: 0;
+    list-style: none;
+}
+.sideBar-nav .nav-content a {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #012970;
+    transition: 0.3;
+    padding: 10px 0 10px 40px;
+    transition: 0.3s;
+}
+.sideBar-nav .nav-content a i {
+    font-size: 6px;
+    margin-right: 8px;
+    line-height: 0;
+    border-radius: 50%;
+}
+/*-- end of side bar --*/
+/*******************************************************/
+.content {
+    padding: 23px 60px;
+    transition: all 0.3s;
+    margin-top: 62px;
+}
+
+/**********************************/
 .contact_us form{
     max-width: 500px;
     margin: auto;
+}
+form{
+    width: 600px;
+    margin: auto;
+}
+table tr td img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+/******************************************/
+/*** contacts view control btn**/
+.view_contacts form {
+    width: 50px;
+    margin: auto;
+}
+/****************************************/
+/*** edit delete ***/
+.users_data table td .d-flex {
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;             /* Adjusts the spacing between buttons */
+    height: 100%;
+    padding: 0;
+    margin-left: -43px;
+}
+table .trash,table .editbtn{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+table .trash i,table .editbtn i{
+    color: white;
+    font-weight: 500;
+}
+/*************************************/
+/* Adjust the container width and alignment */
+.update_user .container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Form heading */
+.update_user .container h2 {
+    margin-top: 20px;
+    text-align: center;
+    color: #333;
+}
+.update_user form{
+    padding: 30px;
+}
+/* Labels for form fields */
+.update_user .container .form-label {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Form control styling */
+.update_user .container .form-control {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+
+/* Update button styling */
+.update_user .container .btn-success {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: linear-gradient(to right, rgba(80, 140, 155, 1), rgba(19, 75, 112, 0.5));
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.update_user .container .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Style for the file input */
+.update_user .container input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Add some spacing between form fields */
+.update_user .container .mb-3 {
+    margin-bottom: 20px;
+}
+
+/* Customize the alert */
+.update_user .container .alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #28a745;
+}
+/****************************/
+/* add product */
+
+.simulation img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.simulation .info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.simulation .info p strong {
+    display: inline-block;
+    width: 120px;
+    color: #495057;
+}
+@media (min-width: 1200px) {
+    .sidebar-hidden .content {
+        margin-left: 0;
+    }
+}
+@media (min-width: 1200px) {
+    .sidebar-hidden .sideBar {
+        left: -300px;
+    }
 }

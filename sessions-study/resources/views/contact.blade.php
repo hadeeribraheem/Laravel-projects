@@ -14,13 +14,16 @@
                         <label class="form-label">Username</label>
                         <input  class="form-control" name="username" value="{{ old('username') }}">
                         @error('username')
-                            {{$message}}
+                             <p class="alert alert-danger mt-2"> {{$message}}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input class="form-control" name="title"
                                 value="{{ old('title') }}">
+                        @error('title')
+                            <p class="alert alert-danger mt-2"> {{$message}}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Message</label>

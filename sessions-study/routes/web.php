@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProductControllerResource;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,3 +104,44 @@ Route::prefix('/contact')->group(function(){
     Route::post('/submit',[ContactController::class,'save'])
         ->name('contact.save');
 });
+
+
+Route::group(['prefix' => 'auth'], function () {
+    // --------- start of register --------------
+    Route::get(' ', [RegisterController::class, 'index']);
+    Route::post('/register-post', [RegisterController::class, 'save'])
+        ->name('auth.register');
+    // --------- end of register ----------------
+
+    // --------- start of login -----------------
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login-post', [LoginController::class, 'save'])
+        ->name('auth.login');
+    // --------- end of login -------------------
+});
+
+Route::get('/logout',[LogoutController::class,'logout_system']);
+Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
+
+
+Route::group(['prefix'=>'dashboard', 'middleware'=> 'admin'],function () {
+    Route::get('/',[DashboardController::class,'users'])->name('dashboard.users');
+    Route::get('/contacts',[DashboardController::class,'contacts'])->name('dashboard.contacts');
+    Route::get('/edit-user/{id}',[DashboardController::class,'edit_user'])->name('dashboard.edit.user');
+
+    /*PUT
+    The PUT method is used to replace an existing resource with an updated version.
+    This method works by replacing the entire resource
+     (i.e., the specific product located at the /products/123 endpoint)
+     with the data that is included in the request’s body.
+    This means that any fields or properties not included in the request body are deleted,
+     and any new fields or properties are added.*/
+
+    Route::put('/update-user/{id}',[DashboardController::class,'update_user'])->name('dashboard.update.user');
+    Route::delete('/users/{id}', [DashboardController::class, 'deleteUser'])->name('dashboard.delete.user');
+    Route::delete('contacts/{id}', [DashboardController::class, 'deleteContact'])->name('dashboard.delete.contact');
+});
+
+Route::resources([
+    'products' => ProductControllerResource::class
+]);

@@ -26,7 +26,7 @@ class ContactController extends Controller
         //return request()->input('username');
         //return request('username');
         //'email' => 'required|email|unique:contacts',
-        dd($request->validated());
+        //dd($request->validated());
         Contact::query()->create($request->validated());
         //return redirect()->back()->with('success', 'Your message has been sent');
     }
