@@ -1,3 +1,1 @@
-[Watch the demo video](/task.mp4)
-
-
+[Watch the demo video](./task.mp4)
