@@ -120,8 +120,6 @@ Route::group(['prefix' => 'auth'], function () {
     // --------- end of login -------------------
 });
 
-Route::get('/logout',[LogoutController::class,'logout_system']);
-Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
 
 
 Route::group(['prefix'=>'dashboard', 'middleware'=> 'admin'],function () {
@@ -142,6 +140,14 @@ Route::group(['prefix'=>'dashboard', 'middleware'=> 'admin'],function () {
     Route::delete('contacts/{id}', [DashboardController::class, 'deleteContact'])->name('dashboard.delete.contact');
 });
 
-Route::resources([
-    'products' => ProductControllerResource::class
-]);
+// Routes that require the user to be logged in
+route::middleware(['checklogin'])->group(function () {
+    //products
+    Route::resources([
+        'products' => ProductControllerResource::class,
+        ]);
+    //home page
+    Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
+    //logout
+    Route::get('/logout',[LogoutController::class,'logout_system']);
+});

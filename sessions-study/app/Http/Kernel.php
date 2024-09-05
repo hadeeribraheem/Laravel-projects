@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CheckIfLoggedIn;
 use App\Http\Middleware\CheckUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -90,6 +91,7 @@ class Kernel extends HttpKernel
         // Custom alias for the CheckUser middleware, which likely performs custom checks on the user.
         'checkuser'=>CheckUser::class,
         'admin' => AdminMiddleware::class,
+        'checklogin' => CheckIfLoggedIn::class,
 
     ];
 }

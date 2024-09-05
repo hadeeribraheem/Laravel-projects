@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Events\SaveProductEvent;
 use App\Http\Requests\ProductFormRequest;
+use App\Http\Resources\ProductsResource;
 use App\Models\Products;
+use App\Services\DeleteEntityService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +17,15 @@ class ProductControllerResource extends Controller
      */
     public function index()
     {
-       return view('products.index');
+        // Fetch all products
+        $data = Products::with(['user', 'images']) // Eager load 'user' and 'image' relationships
+            ->orderBy('id', 'DESC')
+            ->paginate(2);
+
+        $products = ProductsResource::collection($data);
+        //dd($products);
+        return view('admin.view_products', compact('products'));
+       //return view('products.index');
     }
 
     /**
@@ -47,7 +57,11 @@ class ProductControllerResource extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Find the product by its ID and load related 'user' and 'images' relationships
+        $product = Products::with(['user', 'images'])->findOrFail($id);
+
+        // Return the product data to the view
+        return view('admin.update_product', compact('product'));
     }
 
     /**
@@ -71,6 +85,12 @@ class ProductControllerResource extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = DeleteEntityService::delete('Products', $id);
+
+        if ($result) {
+            return redirect()->back()->with('success', 'User deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'User not found or could not be deleted.');
+        }
     }
 }

@@ -130,7 +130,7 @@ li{
 .sideBar .nav-content {
     padding-left: 20px;
 }
-.content {
+header aside .content {
     margin-left: 250px;
     transition: margin-left 0.3s;
 }
@@ -197,7 +197,7 @@ li{
 }
 /*-- end of side bar --*/
 /*******************************************************/
-.content {
+.users_data, .view_contacts ,.products_data{
     padding: 23px 60px;
     transition: all 0.3s;
     margin-top: 62px;
@@ -225,6 +225,10 @@ table tr td img{
 }
 /****************************************/
 /*** edit delete ***/
+table td {
+    overflow: hidden; /* Hides any overflowing content */
+    text-align: center; /* Centers the buttons in the cell */
+}
 .users_data table td .d-flex {
     justify-content: center;
     align-items: center;
@@ -233,9 +237,18 @@ table tr td img{
     padding: 0;
     margin-left: -43px;
 }
+
+.products_data table td .d-flex {
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;             /* Adjusts the spacing between buttons */
+    height: 100%;
+    padding: 0;
+    margin-left: -35px;
+}
 table .trash,table .editbtn{
-    width: 35px;
-    height: 35px;
+    max-width: 40px; /* Limit button width */
+    max-height: 40px; /* Limit button height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,12 +335,14 @@ table .trash i,table .editbtn i{
 /****************************/
 /* add product */
 
+/*
 .simulation img {
     max-width: 100px;
     height: auto;
     margin-bottom: 10px;
     border-radius: 8px;
 }
+*/
 
 .simulation .info p {
     font-size: 16px;
@@ -339,13 +354,146 @@ table .trash i,table .editbtn i{
     width: 120px;
     color: #495057;
 }
+.simulation .images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.simulation .images img {
+    transition: transform 0.3s ease;
+}
+
+.simulation .images img:hover {
+    transform: scale(1.2); /* Zoom effect on hover */
+}
+
+.simulation .info {
+    font-size: 18px;
+}
+
+.simulation .info span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Main Image Styling */
+.main-image img {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+/* Thumbnail Gallery */
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+/* Thumbnail Styling */
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+#productname{
+    font-size: 24px !important;
+    line-height: 32px !important
+}
 @media (min-width: 1200px) {
     .sidebar-hidden .content {
         margin-left: 0;
     }
 }
+
+/*********************************/
+/*****add product card******/
+.card {
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: #f1f4fb;
+    padding: 30px;
+}
+
+.card .simulation .info{
+    z-index: 99999;
+    color: #16423C;
+    font-size: 2em;
+}
+.card .simulation .images,.card-body{
+    z-index: 99999;
+}
+.card-body h5{
+    font-weight: 500;
+}
+#mainImage{
+    z-index: 99999999999;
+
+}
+.card::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(61, 86, 86),rgb(104, 185, 132));
+    height: 130%;
+    animation: rotBGimg 3s linear infinite;
+    transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 15px;
+    background-color: #f1f4fb;
+}
+/* .card:hover:before {
+  background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+  animation: rotBGimg 3.5s linear infinite;
+} */
+
+@media (min-width: 1200px) {
+    .users_data ,.view_contacts ,.products_data{
+        margin-left: 260px;
+    }
+}
 @media (min-width: 1200px) {
     .sidebar-hidden .sideBar {
         left: -300px;
+    }
+}
+@media (max-width: 1199px) {
+    .users_data , .view_contacts,.products_data{
+        padding: 20px;
+    }
+}
+@media (min-width: 1200px) {
+    .sidebar-hidden .users_data ,.sidebar-hidden .view_contacts,.sidebar-hidden .products_data{
+        margin-left: 0;
     }
 }

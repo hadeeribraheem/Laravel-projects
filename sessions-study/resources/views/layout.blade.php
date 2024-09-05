@@ -19,10 +19,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/welcome">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">contact</a>
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/create">Product</a>
                 </li>
                @guest
                    <li class="nav-item">
@@ -38,11 +41,9 @@
         </div>
     </div>
 </nav>
-<nav>
-    <div class="content">
-        @yield('content')
-    </div>
-</nav>
+<div class="content">
+    @yield('content')
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="{{ asset('js/script.js') }}"></script>

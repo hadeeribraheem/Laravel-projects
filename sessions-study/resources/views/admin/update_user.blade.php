@@ -1,7 +1,7 @@
 @extends('admin.admin_dashboard')
 @section('title', 'Edit User')
 @section('content')
-    <div class="update_user">
+    <div class="users_data">
         <div class="container">
 
                 @if($errors->any())
