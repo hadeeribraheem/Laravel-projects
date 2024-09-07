@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- Simulation inside a card -->
-                <div class="col-lg-6 mt-5 mb-2">
+                <div class="col-lg-6 mt-5 mb-2 addProductPreviwCard">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h4> Product Preview</h4>

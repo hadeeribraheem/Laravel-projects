@@ -35,10 +35,10 @@
                             <td>{{  $product->user->username }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->info }}</td>
-                            <td>{{ $product -> price}}</td>
+                            <td>{{ $product -> price  . '$' }}</td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center .control-buttons ">
-                                    <a href="{{route('products.show',$product->id)}}" class="btn btn-primary btn-sm editbtn">
+                                    <a href="{{route('products.edit',$product->id)}}" class="btn btn-primary btn-sm editbtn">
                                         <i class="bi bi-pencil"></i>
                                     </a>
 

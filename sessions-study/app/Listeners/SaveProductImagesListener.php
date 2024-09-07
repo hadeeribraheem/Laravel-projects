@@ -23,8 +23,9 @@ class SaveProductImagesListener
     public function handle(object $event): void
     {
         foreach ($event->images as $image) {
+
             $name = $this->upload($image, folder_name: 'products');
-            ImageModalSave::make($event->product->id,'products',$name);
+            ImageModalSave::make($event->product->id,'Products',$name); //error here
         }
         //dd('now Listener working', $event->data, $event->images, $event->product);
     }

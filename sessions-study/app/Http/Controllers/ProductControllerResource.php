@@ -12,19 +12,49 @@ use Illuminate\Support\Facades\DB;
 
 class ProductControllerResource extends Controller
 {
+    public function __construct(){
+        $this->middleware('checklogin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Fetch all products
+        // Check if the user is authenticated
+        if (auth()->check()) {
+            // If authenticated and user is an admin, direct to admin view with products data
+            if (auth()->user()->type === 'admin') {
+                // Fetch all products with relationships for admin view
+                $data = Products::with(['user', 'images']) // Eager load 'user' and 'image' relationships
+                ->orderBy('id', 'DESC')
+                    ->paginate(2);
+
+                $products = ProductsResource::collection($data);
+
+                return view('admin.view_products', compact('products'));
+            }
+        }
+
+        // If the user is not authenticated or not an admin, fetch the products without admin control
+        $data = Products::with(['user', 'images'])
+                            ->orderBy('id', 'DESC')
+                            ->paginate(10);
+
+        $products = ProductsResource::collection($data);
+
+        // Redirect to the home page with the products data for non-admins
+        return view('home', compact('products'));
+
+
+
+        /*// Fetch all products
         $data = Products::with(['user', 'images']) // Eager load 'user' and 'image' relationships
             ->orderBy('id', 'DESC')
             ->paginate(2);
 
         $products = ProductsResource::collection($data);
         //dd($products);
-        return view('admin.view_products', compact('products'));
+        return view('admin.view_products', compact('products'));*/
        //return view('products.index');
     }
 
@@ -57,11 +87,7 @@ class ProductControllerResource extends Controller
      */
     public function show(string $id)
     {
-        // Find the product by its ID and load related 'user' and 'images' relationships
-        $product = Products::with(['user', 'images'])->findOrFail($id);
 
-        // Return the product data to the view
-        return view('admin.update_product', compact('product'));
     }
 
     /**
@@ -69,15 +95,51 @@ class ProductControllerResource extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //dd('hello');
+        // Find the product by its ID and load related 'user' and 'images' relationships
+        $product = Products::with(['user', 'images'])->findOrFail($id);
+        //|| $product->user_id != auth()->id() || auth()->user()->type != 'admin'
+        if ($product === null ) {
+            return redirect()->to('/products');
+        }
+        // Return the product data to the view
+        return view('admin.update_product', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductFormRequest $request, string $id)
     {
-        //
+        //dd($request ->all());
+        // Start a database transaction
+        DB::beginTransaction();
+
+        // Fetch the product with its associated images
+        $product = Products::query()->with(['images'])->find($id);
+
+        // If no new images are uploaded and there are no existing images, return an error
+        if (sizeof($product->images) == 0 && $request->hasFile('images') == false) {
+            return redirect()->back()->withErrors(['error' => 'You should upload at least one image']);
+        }
+
+        // Prepare the basic data except for the 'images' key
+        $basic_data = $request->except('images');
+        $basic_data['id'] = $id;
+        $basic_data['user_id'] = $product->user_id;
+
+        // Trigger the SaveProductEvent with the updated product data
+        event(new SaveProductEvent(
+            $basic_data,
+            $request->file('images') ?? [], // If images exist in the request, use them; otherwise, default to an empty array
+            false // Set 'create' to false since this is an update
+        ));
+
+        // Commit the transaction
+        DB::commit();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('message', 'Product updated successfully');
     }
 
     /**

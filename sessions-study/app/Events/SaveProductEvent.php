@@ -22,12 +22,21 @@ class SaveProductEvent
     public $data;
     public $images;
 
-    public function __construct($data, $images)
+    public function __construct($data, $images, $create = true)
     {
         $this->data = $data;
         $this->images = $images;
-        $this->data['user_id'] = auth()->id();
-        $this->product = Products::query()->create($this->data);
+
+        if ($create) {
+            // Attach the authenticated user's ID to the data
+            $this->data['user_id'] = auth()->id();
+        }
+        // Update or create the product with the provided data
+        $this->product = Products::query()->updateOrCreate(
+            ['id' => $this->data['id'] ?? null], // Use existing ID or null for new product
+            $this->data
+        );
+        //$this->product = Products::query()->create($this->data);
     }
 
     /**

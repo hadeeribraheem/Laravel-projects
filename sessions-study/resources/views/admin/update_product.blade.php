@@ -3,6 +3,7 @@
 @section('content')
     <div class="products_data">
         <div class="container">
+            <h2 class="text-center">Update Product</h2>
 
             @if($errors->any())
                 @foreach($errors->all() as $error)
@@ -13,9 +14,6 @@
             @if(session('success'))
                 <p class="alert alert-success">{{session('success')}}</p>
             @endif
-
-            <h2 class="text-center">Update Product</h2>
-
             <form method="post" action="{{route('products.update', $product->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -32,7 +30,7 @@
 
                 <div class="mb-3">
                     <label>Price</label>
-                    <input class="form-control" name="price" value="{{ $product->price }}">
+                    <input class="form-control" name="price" value="{{ $product->price }} ">
                 </div>
 
                 <div class="mb-3">
@@ -42,11 +40,12 @@
                     @if($product->images->isNotEmpty())
                         <div class="mt-3">
                             <label>Current Images:</label>
-                            <div class="row">
+                            <div class="row d-flex">
                                 @foreach($product->images as $image)
-                                    <div class="col-md-3">
-                                        <img src="{{ asset('images/'.$image->name) }}" alt="Product Image" class="img-fluid" style="max-width: 100%; margin-bottom: 10px;">
-                                    </div>
+                                        <div class=" col-md-3 d-flex position-relative delete-image justify-content-center  ">
+                                            <a href="/delete-item?model_name=Images&id={{ $image->id }}"><i class="ri-close-line"></i></a>
+                                            <img src="{{ asset('images/'.$image->name) }}" alt="Product Image" class="img-fluid align-items-center " style="max-width: 100%;max-height: 149px ;margin-right: 10px;">
+                                        </div>
                                 @endforeach
                             </div>
                         </div>

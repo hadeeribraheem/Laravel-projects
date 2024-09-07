@@ -22,6 +22,29 @@ li{
 }
 /*--end of global classes--*/
 /*******************************************************/
+/***homepage***/
+.homepage .card{
+   padding: 30px;
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.homepage .card form {
+    width: 700px;
+    margin: auto;
+}
+.homepage .card .btn {
+    width: 349px;
+    margin: auto;
+}
+.homepage .card .card-body h4{
+    font-weight: 700;
+    color: #376353;
+    margin-top: 10px;
+}
+.homepage .card .card-body h5{
+    font-weight: 600;
+
+}
 /*******************************************************/
 /*--start of nav bar--*/
 .header {
@@ -419,7 +442,7 @@ table .trash i,table .editbtn i{
 
 /*********************************/
 /*****add product card******/
-.card {
+.addProductPreviwCard .card {
     position: relative;
     display: flex;
     place-content: center;
@@ -430,22 +453,22 @@ table .trash i,table .editbtn i{
     padding: 30px;
 }
 
-.card .simulation .info{
+.addProductPreviwCard .card .simulation .info{
     z-index: 99999;
     color: #16423C;
     font-size: 2em;
 }
-.card .simulation .images,.card-body{
+.addProductPreviwCard .card .simulation .images,.card-body{
     z-index: 99999;
 }
-.card-body h5{
+.addProductPreviwCard .card-body h5{
     font-weight: 500;
 }
 #mainImage{
     z-index: 99999999999;
 
 }
-.card::before {
+.addProductPreviwCard .card::before {
     content: '';
     position: absolute;
     width: 100px;
@@ -465,7 +488,7 @@ table .trash i,table .editbtn i{
     }
 }
 
-.card::after {
+.addProductPreviwCard .card::after {
     content: '';
     position: absolute;
     inset: 5px;
@@ -496,4 +519,23 @@ table .trash i,table .editbtn i{
     .sidebar-hidden .users_data ,.sidebar-hidden .view_contacts,.sidebar-hidden .products_data{
         margin-left: 0;
     }
+}
+/**********************/
+.form-images img {
+    height: 133px; /* Set the height of the image */
+}
+
+.delete-image a {
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    right: 5px;
+    background-color: darkred;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }

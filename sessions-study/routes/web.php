@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeleteItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductControllerResource;
@@ -23,9 +24,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 /****************************************************************************************************************************/
 
-route::get('/', function () {
-    return view('welcome');
-});
+
 /****************************************************************************************************************************/
 
 // This route matches both GET and POST requests to the '/contact' URL.
@@ -97,6 +96,9 @@ Route::prefix('/dashboard')->group(function () {
 
 /****************************************************************************************************************************/
 
+route::get('/products', function () {
+    return view('home');
+});
 Route::get('/about',[HomeController::class,'index']);
 
 Route::prefix('/contact')->group(function(){
@@ -151,3 +153,4 @@ route::middleware(['checklogin'])->group(function () {
     //logout
     Route::get('/logout',[LogoutController::class,'logout_system']);
 });
+Route::get('/delete-item', [DeleteItemController::class, 'delete'])->name('deleteItem');

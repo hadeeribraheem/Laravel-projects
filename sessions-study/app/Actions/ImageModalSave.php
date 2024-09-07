@@ -8,9 +8,9 @@ class ImageModalSave
 {
     public static function make($id, $model_name, $image_file)
     {
-        Images::query()->where('imageable_id', $id)
+        /*Images::query()->where('imageable_id', $id)
             ->where('imageable_type', 'App\Models\\' . $model_name)
-            ->delete();
+            ->delete();*/
 
         Images::query()->create([
             'imageable_id' => $id,
