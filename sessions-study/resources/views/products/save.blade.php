@@ -22,6 +22,10 @@
                             <input class="form-control simulated" id="product-price" type="number" name="price" required>
                         </div>
                         <div class="mb-2">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                        </div>
+                        <div class="mb-2">
                             <label>Images</label>
                             <input class="form-control" type="file" name="images[]" accept="images/*" multiple required>
                         </div>
@@ -64,6 +68,7 @@
                                         <strong>Price</strong>
                                         <span related_to="price"></span>
                                     </p>
+
                                 </div>
                             </div>
                         </div>

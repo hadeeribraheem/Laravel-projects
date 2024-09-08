@@ -3,6 +3,12 @@
 @section('content')
     <div class="homepage container mt-5">
         <div class="row">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             @foreach($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
@@ -18,19 +24,24 @@
                             <h4 class="card-title">{{ $product->name }}</h4>
                             <!-- Display product price -->
                             <h5 class="card-text">{{ $product->price }} $</h5>
-                            <!-- Display product info (optional) -->
-                           {{-- <p class="card-text">{{ $product->info }}</p>--}}
+
+                            <!-- Display stock status -->
+                            @if($product->quantity > 0)
+                                <p class="text-success">In stock</p>
+                            @else
+                                <p class="text-danger">Out of stock</p>
+                            @endif
                         </div>
 
                         <div>
                             <!-- Add to Cart button -->
-{{--
-                            action="{{ route('cart.add', $product->id) }}"
---}}
                             @if(auth()->id() != $product->user_id)
-                                <form method="POST" >
+                                <form method="POST" action="{{ route('cart.add', $product->id) }}">
                                     @csrf
-                                    <button class="btn btn-success" type="submit">Add to Cart</button>
+                                    <button class="btn btn-success" type="submit"
+                                            @if($product->quantity == 0) disabled @endif>
+                                        Add to Cart
+                                    </button>
                                 </form>
                             @else
                                 <p class="text-muted text-center">You own this product</p>

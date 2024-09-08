@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Actions\ImageModalSave;
 use App\Http\Resources\ContactResoutce;
+use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserResource;
 use App\Models\Contact;
+use App\Models\Order;
 use App\Models\User;
 use App\Services\DeleteEntityService;
 use App\Services\Users\SaveUserInfoService;
@@ -93,6 +95,15 @@ class DashboardController extends Controller
         }
     }
 
+    public function orders()
+    {
+        $data = Order::with('user')
+            ->paginate(3);
+        //dd($data);
+        $orders = OrderResource::collection($data);
+        //dd($orders);
+        return view('admin.view_orders', compact('orders'));
+    }
     /*
      * class DeleteController extends Controller
         {

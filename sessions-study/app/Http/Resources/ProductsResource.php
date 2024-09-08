@@ -19,7 +19,7 @@ class ProductsResource extends JsonResource
             'user_id' => $this->user_id,
             'user_name' => $this->whenLoaded('user', function () {
                 return $this->user->name;
-            }), // Loading the user's name
+            }),
             'image' => ImageResource::make($this->whenLoaded('image')), // Load the image relationship
             'name' => $this->name,
             'info' => $this->info,

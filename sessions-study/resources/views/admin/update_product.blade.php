@@ -4,7 +4,7 @@
     <div class="products_data">
         <div class="container">
             <h2 class="text-center">Update Product</h2>
-
+               {{-- {{ dd($product) }}--}}
             @if($errors->any())
                 @foreach($errors->all() as $error)
                     <p class="alert alert-danger">{{$error}}</p>
@@ -32,7 +32,10 @@
                     <label>Price</label>
                     <input class="form-control" name="price" value="{{ $product->price }} ">
                 </div>
-
+                <div class="mb-3">
+                    <label for="quantity">Stock</label>
+                    <input class="form-control" name="quantity" min="1" value="{{ $product->quantity }} ">
+                </div>
                 <div class="mb-3">
                     <label>Product Images (leave blank if you don't want to change)</label>
                     <input class="form-control" type="file" name="images[]"  accept="images/*" multiple >

@@ -90,6 +90,11 @@
                         <i class="bi bi-circle"></i><span>Products</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('dashboard.orders')}}">
+                        <i class="bi bi-circle"></i><span>Orders</span>
+                    </a>
+                </li>
             </ul>
         </li>
 

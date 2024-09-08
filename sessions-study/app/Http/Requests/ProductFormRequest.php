@@ -25,12 +25,14 @@ class ProductFormRequest extends FormRequest
             'name' => 'required',
             'info' => 'required',
             'price' => 'required',
+            'quantity' => 'required|integer|min:1', // Validate quantity input
         ];
 
         // Check if the current request URI is for creating a new product
         if ($this->getRequestUri() == '/products') {
             $arr['images'] = 'required|array'; // Ensure 'images' is an array of files
             $arr['images.*'] = 'required|mimes:jpeg,jpg,png,gif|max:2048'; // Each image should be a valid image type and not exceed 2MB
+
         }
 
         return $arr;

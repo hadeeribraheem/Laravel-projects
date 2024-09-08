@@ -11,7 +11,7 @@ class Products extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'name', 'info', 'price'];
+    protected $fillable = ['user_id', 'name', 'info', 'price','quantity'];
     public function images()
     {
         return $this->morphMany(Images::class, 'imageable');
@@ -20,4 +20,5 @@ class Products extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }

@@ -22,11 +22,9 @@ class ProductControllerResource extends Controller
     {
         // Check if the user is authenticated
         if (auth()->check()) {
-            // If authenticated and user is an admin, direct to admin view with products data
             if (auth()->user()->type === 'admin') {
-                // Fetch all products with relationships for admin view
-                $data = Products::with(['user', 'images']) // Eager load 'user' and 'image' relationships
-                ->orderBy('id', 'DESC')
+                $data = Products::with(['user', 'images'])
+                    ->orderBy('id', 'DESC')
                     ->paginate(2);
 
                 $products = ProductsResource::collection($data);
@@ -35,7 +33,6 @@ class ProductControllerResource extends Controller
             }
         }
 
-        // If the user is not authenticated or not an admin, fetch the products without admin control
         $data = Products::with(['user', 'images'])
                             ->orderBy('id', 'DESC')
                             ->paginate(10);
@@ -73,8 +70,8 @@ class ProductControllerResource extends Controller
     {
         DB::beginTransaction();
         event(new SaveProductEvent(
-            request()->except(keys: 'images'),
-            request()->file(key: 'images')
+            $request->except(keys: 'images'),
+            $request->file(key: 'images')
         ));
         DB::commit();
 

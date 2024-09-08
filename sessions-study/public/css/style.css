@@ -220,7 +220,7 @@ header aside .content {
 }
 /*-- end of side bar --*/
 /*******************************************************/
-.users_data, .view_contacts ,.products_data{
+.users_data, .view_contacts ,.products_data , .orders{
     padding: 23px 60px;
     transition: all 0.3s;
     margin-top: 62px;
@@ -501,7 +501,7 @@ table .trash i,table .editbtn i{
 } */
 
 @media (min-width: 1200px) {
-    .users_data ,.view_contacts ,.products_data{
+    .users_data ,.view_contacts ,.products_data ,.orders{
         margin-left: 260px;
     }
 }

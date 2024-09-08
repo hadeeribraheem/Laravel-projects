@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('info');
             $table->float('price');
+            $table->integer('quantity')->default(0); // Add the quantity column
             $table->softDeletes(); //deleted_at
             $table->timestamps();
         });

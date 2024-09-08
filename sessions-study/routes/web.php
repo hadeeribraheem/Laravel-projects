@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeleteItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductControllerResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -129,18 +130,12 @@ Route::group(['prefix'=>'dashboard', 'middleware'=> 'admin'],function () {
     Route::get('/',[DashboardController::class,'users'])->name('dashboard.users');
     Route::get('/contacts',[DashboardController::class,'contacts'])->name('dashboard.contacts');
     Route::get('/edit-user/{id}',[DashboardController::class,'edit_user'])->name('dashboard.edit.user');
-
-    /*PUT
-    The PUT method is used to replace an existing resource with an updated version.
-    This method works by replacing the entire resource
-     (i.e., the specific product located at the /products/123 endpoint)
-     with the data that is included in the request’s body.
-    This means that any fields or properties not included in the request body are deleted,
-     and any new fields or properties are added.*/
-
     Route::put('/update-user/{id}',[DashboardController::class,'update_user'])->name('dashboard.update.user');
     Route::delete('/users/{id}', [DashboardController::class, 'deleteUser'])->name('dashboard.delete.user');
     Route::delete('contacts/{id}', [DashboardController::class, 'deleteContact'])->name('dashboard.delete.contact');
+    Route::get('/orders',[DashboardController::class,'orders'])->name('dashboard.orders');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::put('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 });
 
 // Routes that require the user to be logged in
@@ -156,6 +151,10 @@ route::middleware(['checklogin'])->group(function () {
 });
 Route::get('/delete-item', [DeleteItemController::class, 'delete'])->name('deleteItem');
 
-route::group(['prefix' => 'cart', 'middleware' => 'checklogin'], function () {
+Route::group(['prefix' => 'cart', 'middleware' => 'checklogin'], function () {
     Route::post('/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
 });
