@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeleteItemController;
@@ -154,3 +155,7 @@ route::middleware(['checklogin'])->group(function () {
     Route::get('/logout',[LogoutController::class,'logout_system']);
 });
 Route::get('/delete-item', [DeleteItemController::class, 'delete'])->name('deleteItem');
+
+route::group(['prefix' => 'cart', 'middleware' => 'checklogin'], function () {
+    Route::post('/add/{id}', [CartController::class, 'add'])->name('cart.add');
+});
