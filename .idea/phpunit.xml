@@ -5,6 +5,12 @@
       <list>
         <option value="$PROJECT_DIR$/study-sessions/tests/Unit" />
         <option value="$PROJECT_DIR$/study-sessions/tests/Feature" />
+        <option value="$PROJECT_DIR$/sessions-study/tests/Unit" />
+        <option value="$PROJECT_DIR$/sessions-study/tests/Feature" />
+        <option value="$PROJECT_DIR$/universities_learning/tests/Unit" />
+        <option value="$PROJECT_DIR$/universities_learning/tests/Feature" />
+        <option value="$PROJECT_DIR$/login-signup/tests/Unit" />
+        <option value="$PROJECT_DIR$/login-signup/tests/Feature" />
       </list>
     </option>
   </component>

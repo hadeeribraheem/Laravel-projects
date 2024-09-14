@@ -112,7 +112,7 @@ Route::prefix('/contact')->group(function(){
 
 Route::group(['prefix' => 'auth'], function () {
     // --------- start of register --------------
-    Route::get(' ', [RegisterController::class, 'index']);
+    Route::get('/register', [RegisterController::class, 'index']);
     Route::post('/register-post', [RegisterController::class, 'save'])
         ->name('auth.register');
     // --------- end of register ----------------
