@@ -19,7 +19,7 @@ class HandleDataBeforeSaveAction
 
         $languages = languages::query()->pluck('prefix'); // ['ar', 'en']
 
-        $data['price']=100;
+        //$data['price']=100;
         $output = [];
 
         // Loop through the provided data
@@ -30,7 +30,7 @@ class HandleDataBeforeSaveAction
             foreach($languages as $language) { // Loop through languages (e.g., 'ar', 'en')
 
                 // Check if the key contains the language (e.g., ar_name)
-                if (Str::contains($key, $language)) {
+                if (Str::contains($key, $language.'_')) {
 
                     // Replace language part and store in input_name
                     $input_name = Str::replace($language, '', $key); // Replace 'ar_name' with '_name'
@@ -57,6 +57,6 @@ class HandleDataBeforeSaveAction
 
             }
         }
-       return $output;
+    return $output;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ColleagesControllerResource;
+use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\GovernmentControllerResource;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\YearController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'changeLang'], function () {
     Route::post('/register', RegisterController::class);
     Route::post('/login', LoginController::class);
-
+    Route::resources([
+        'governments' => GovernmentControllerResource::class,
+        'colleges' => ColleagesControllerResource::class,
+        'years'=>YearController::class,
+    ]);
+    Route::post('/delete-item', DeleteController::class);
 });
-Route::resources([
-    'governments' => GovernmentControllerResource::class,
-]);

@@ -8,7 +8,9 @@ use App\Filters\GovernmentsIdFilter;
 use App\Filters\NameFilter;
 use App\Filters\StartDateFilter;
 use App\Http\Requests\GovernmentFormRequest;
+use App\Http\Resources\GovernmentResource;
 use App\Models\governments;
+use App\Services\Messages;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
@@ -23,7 +25,7 @@ class GovernmentControllerResource extends Controller
      */
     public function index()
     {
-        $data = governments::query()->orderBy('governments_id','DESC');
+        $data = governments::query()->orderBy('id','DESC');
         $result = app(Pipeline::class)
             ->send($data)
             ->through([
@@ -34,7 +36,7 @@ class GovernmentControllerResource extends Controller
             ])
             ->thenReturn()
             ->paginate(10);
-        return $result;
+        return GovernmentResource::collection($result);
         // DRY (Don't Repeat Yourself) principle used to prevent code duplication
 
        /* if (request()->filled('name')) {
@@ -51,7 +53,18 @@ class GovernmentControllerResource extends Controller
 
         return $data->get();*/
     }
+    public function save($data)
+    {
 
+        // Attempt to update or create the record
+        $output = governments::query()->updateOrCreate(
+            ['id' => $data['id'] ?? null],
+            $data
+        );
+
+        // Return a success message
+        return Messages::success(GovernmentResource::make($output), __('messages.saved_successfully'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -59,7 +72,7 @@ class GovernmentControllerResource extends Controller
     {
         $data = $request->validated();
         $handled_data = HandleDataBeforeSaveAction::handle($data);
-        return $handled_data;
+        return $this->save($handled_data);
     }
 
     /**
@@ -77,9 +90,13 @@ class GovernmentControllerResource extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GovernmentFormRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $handled_data = HandleDataBeforeSaveAction::handle($data);
+        $handled_data['id'] = $id;
+
+        return $this->save($handled_data);
     }
 
     /**

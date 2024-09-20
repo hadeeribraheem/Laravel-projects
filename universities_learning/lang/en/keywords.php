@@ -25,5 +25,8 @@ return [
     'password_mismatch' => 'Passwords do not match',
     'invalid_date' => 'The date is invalid',
 // -------------------------end of general inputs------------------------
+    // start of colleges
+    'government' => 'government',
 
+    // end of colleges
 ];

@@ -25,4 +25,10 @@ return [
     'password_mismatch' => 'كلمة المرور غير متطابقة',
     'invalid_date' => 'التاريخ غير صالح',
     // -------------------------end of general inputs------------------------
+
+    // start of colleges
+    'government' => 'المحافظة',
+
+    // end of colleges
+
 ];

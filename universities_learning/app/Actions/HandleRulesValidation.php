@@ -15,21 +15,20 @@ class HandleRulesValidation
             });*/
 
         $langs = languages::query()->pluck('prefix'); // [ar, en]
-        $basic = [];
+       // $basic = [];
 
         foreach($langs as $lang){
             foreach($data as $item){ // [name, info]
-                // Extract the part before the colon (e.g., 'name' from 'name:required')
                 $name = Str::before($item, ':'); // Extract name
 
-                // Extract the part after the colon (e.g., 'required' from 'name:required')
-                $validation = Str::after($item, ':'); // Extract required/nullable
+                $validation = Str::after($item, ':');
 
                 $basic[$lang . '_' . $name] = $validation;
             }
         }
-
+      //  dd($basic);
         // name, info, user_id
+        //dd($basic);
         return $basic;
     }
 }

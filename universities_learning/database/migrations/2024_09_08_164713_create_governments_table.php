@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('name'); // Column for government name
             $table->text('info')->nullable(); // Nullable info column
-            $table->
+            //$table->
             $table->softDeletes(); // Soft deletes for the table
             $table->timestamps(); // Timestamps (created_at and updated_at)
         });
