@@ -106,7 +106,7 @@ class ProductControllerResource extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductFormRequest $request, string $id)
+    public function update(ProgetductFormRequest $request, string $id)
     {
         //dd($request ->all());
         // Start a database transaction

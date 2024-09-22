@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();  // Primary key
 
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             // Foreign key to 'colleagues_years' table
             $table->foreignId('year_id')
                 ->constrained('colleagues_years')

@@ -15,4 +15,8 @@ class colleagues_years extends Model
     {
         return $this->belongsTo(years::class,'year_id');
     }
+    public function collage()
+    {
+        return $this->belongsTo(colleagues::class, 'college_id');
+    }
 }
